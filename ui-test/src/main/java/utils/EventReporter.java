@@ -1,5 +1,7 @@
 package utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
 public class EventReporter implements WebDriverEventListener {
+    private static Logger log = LogManager.getRootLogger();
+
     public void beforeAlertAccept(WebDriver driver) {
 
     }
@@ -64,7 +68,7 @@ public class EventReporter implements WebDriverEventListener {
     }
 
     public void beforeClickOn(WebElement element, WebDriver driver) {
-        System.out.println("Clicking on " + element.getText());
+        log.info("Clicking on " + element.getText());
     }
 
     public void afterClickOn(WebElement element, WebDriver driver) {
@@ -108,7 +112,7 @@ public class EventReporter implements WebDriverEventListener {
     }
 
     public void beforeGetText(WebElement element, WebDriver driver) {
-        System.out.println("Getting text of " + element.getText());
+        log.info("Getting text of " + element.getText());
     }
 
     public void afterGetText(WebElement element, WebDriver driver, String text) {

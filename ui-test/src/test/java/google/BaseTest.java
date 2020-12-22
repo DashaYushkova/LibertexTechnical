@@ -85,7 +85,7 @@ public abstract class BaseTest {
     private ChromeOptions getChromeOptions(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
-        options.setHeadless(false);
+        options.setHeadless(true);
         return options;
     }
 }
