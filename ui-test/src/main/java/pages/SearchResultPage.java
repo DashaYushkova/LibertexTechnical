@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.Waiter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,15 +40,19 @@ public class SearchResultPage {
                 .collect(Collectors.toList());
     }
 
-    public String getSearchTooltipText() {
+    public void moveToInputAndTriggerTooltip() {
         actions = new Actions(driver);
-        actions.moveToElement(logo).moveToElement(searchInputField).build().perform();
+        actions.moveToElement(logo).moveToElement(searchInputField).perform();
+        Waiter.pause(5);
+    }
+
+    public String getInputTooltipText() {
         return searchInputField.getAttribute("title");
     }
 
     public SearchResultPage clickOnTopLeftLogo() {
         actions = new Actions(driver);
-        actions.moveToElement(logo).click().build().perform();
+        actions.moveToElement(logo).click().perform();
         return this;
     }
 }

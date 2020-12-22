@@ -14,8 +14,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.GoogleHomePage;
 import pages.SearchResultPage;
+import ru.yandex.qatools.ashot.Screenshot;
 import utils.EventReporter;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -55,17 +57,35 @@ public abstract class BaseTest {
             TakesScreenshot camera = driver;
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
             try {
-                Files.move(screenshot, new File("src/test/resources/screenshots/" + result.getName() + ".png"));
+                Files.move(screenshot, new File("src/test/resources/screenshots-on-failure/" + result.getName() + ".png"));
             } catch(IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    protected Screenshot takeScreenshot(String name) {
+        TakesScreenshot camera = driver;
+        File screenshot = camera.getScreenshotAs(OutputType.FILE);
+        String screenshotPath = "src/test/resources/screenshots-to-compare/screen-" + name + ".png";
+        Screenshot screenToCompare = null;
+        try {
+            Files.move(screenshot, new File(screenshotPath));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            screenToCompare = new Screenshot(ImageIO.read(new File(screenshotPath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return screenToCompare;
+    }
+
     private ChromeOptions getChromeOptions(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
-        options.setHeadless(true);
+        options.setHeadless(false);
         return options;
     }
 }

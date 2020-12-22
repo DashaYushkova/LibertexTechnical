@@ -1,6 +1,9 @@
 package google;
 
 import org.testng.annotations.Test;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 
 import java.util.List;
 
@@ -14,7 +17,13 @@ public class SearchTest extends BaseTest {
         softly.assertThat(searchResultPage.getPageTitle()).isEqualTo("libertex group - Поиск в Google");
         softly.assertThat(searchResults).allMatch(result -> result.contains("libertex"));
 
-        softly.assertThat(searchResultPage.getSearchTooltipText()).isEqualTo("Поиск");
+        Screenshot inputNotHoveredOver = takeScreenshot("first");
+        searchResultPage.moveToInputAndTriggerTooltip();
+        Screenshot inputHoveredOver = takeScreenshot("second");
+        ImageDiff diff = new ImageDiffer().makeDiff(inputNotHoveredOver, inputHoveredOver);
+        softly.assertThat(diff.getDiffSize()).isNotEqualTo(0);
+
+        softly.assertThat(searchResultPage.getInputTooltipText()).isEqualTo("Поиск");
 
         List<String> noResults = searchResultPage.clickOnTopLeftLogo().getResults();
         softly.assertThat(noResults).isEmpty();
