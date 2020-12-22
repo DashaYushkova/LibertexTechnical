@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Unit Test" verbose="1">
+    <test name="Check Age Function">
+        <classes>
+            <class name="AgeTest"/>
+        </classes>
+    </test>
+</suite>

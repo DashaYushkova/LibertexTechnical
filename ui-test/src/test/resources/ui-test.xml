@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Google Search Test" verbose="1">
+    <test name="Check Search Page Functionality">
+        <classes>
+            <class name="google.SearchTest"/>
+        </classes>
+    </test>
+</suite>
