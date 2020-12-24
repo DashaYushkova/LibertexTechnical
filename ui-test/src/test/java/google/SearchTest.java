@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SearchTest extends BaseTest {
 
-    @Test(invocationCount = 10)
+    @Test
     public void testGoogleSearch() {
         // check the main search page is opened
         softly.assertThat(googleHomePage.getPageTitle()).isEqualTo("Google");
