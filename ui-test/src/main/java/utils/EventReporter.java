@@ -28,7 +28,7 @@ public class EventReporter implements WebDriverEventListener {
     }
 
     public void beforeNavigateTo(String url, WebDriver driver) {
-
+        log.info("Navigating to " + url);
     }
 
     public void afterNavigateTo(String url, WebDriver driver) {
