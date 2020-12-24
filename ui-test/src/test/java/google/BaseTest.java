@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeMethod;
 import pages.GoogleHomePage;
 import pages.SearchResultPage;
 import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -73,5 +75,10 @@ public abstract class BaseTest {
             e.printStackTrace();
         }
         return screenToCompare;
+    }
+
+    protected boolean areImagesEqual(Screenshot first, Screenshot second){
+        ImageDiff diff = new ImageDiffer().makeDiff(first, second);
+        return diff.getDiffSize() == 0;
     }
 }

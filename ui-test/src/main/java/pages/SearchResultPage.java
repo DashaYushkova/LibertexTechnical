@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Waiter;
 
 import java.util.List;
@@ -14,6 +16,7 @@ public class SearchResultPage {
 
     private WebDriver driver;
     private Actions actions;
+    private WebDriverWait wait;
 
     @FindBy(xpath = "//input[@class='gLFyf gsfi']")
     private WebElement searchInputField;
@@ -26,6 +29,8 @@ public class SearchResultPage {
 
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, 10);
+        actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -41,18 +46,19 @@ public class SearchResultPage {
     }
 
     public void moveToInputAndTriggerTooltip() {
-        actions = new Actions(driver);
-        actions.moveToElement(logo).moveToElement(searchInputField).perform();
-        Waiter.pause(5);
+        actions.moveToElement(wait.until(ExpectedConditions.visibilityOf(logo)))
+                .moveToElement(wait.until(ExpectedConditions.visibilityOf(searchInputField)))
+                .perform();
+        Waiter.pause(7);
     }
 
     public String getInputTooltipText() {
+        wait.until(ExpectedConditions.visibilityOf(searchInputField));
         return searchInputField.getAttribute("title");
     }
 
     public SearchResultPage clickOnTopLeftLogo() {
-        actions = new Actions(driver);
-        actions.moveToElement(logo).click().perform();
+        actions.moveToElement(wait.until(ExpectedConditions.elementToBeClickable(logo))).click().perform();
         return this;
     }
 }
