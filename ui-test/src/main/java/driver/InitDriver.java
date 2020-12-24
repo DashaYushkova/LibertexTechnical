@@ -14,8 +14,7 @@ public class InitDriver {
     private static EventFiringWebDriver eventDriver;
     private static Logger log = LogManager.getRootLogger();
 
-    private InitDriver() {
-    }
+    private InitDriver() {}
 
     public static WebDriver initDriver() {
         if (eventDriver == null) {
