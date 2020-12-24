@@ -24,7 +24,7 @@ public class AgeTest {
         assertTrue(Age.calculateAge(validBirthday) >= 18);
     }
 
-    private static LocalDate getYearsAgo(int yearsAgo){
+    private LocalDate getYearsAgo(int yearsAgo){
         Calendar date = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         date.set(Calendar.YEAR, date.get(Calendar.YEAR) - yearsAgo);
