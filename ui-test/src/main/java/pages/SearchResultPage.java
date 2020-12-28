@@ -21,7 +21,7 @@ public class SearchResultPage {
     @FindBy(xpath = "//input[@class='gLFyf gsfi']")
     private WebElement searchInputField;
 
-    @FindBy(xpath = "//*[@id='logo']")
+    @FindBy(xpath = "//div[@class='logo']/a")
     private WebElement logo;
 
     @FindBy(xpath = "//h3[@class='LC20lb DKV0Md']")
