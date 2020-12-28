@@ -35,7 +35,7 @@ public class InitDriver {
     private static ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        options.setHeadless(true);
+        options.setHeadless(false);
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--disable-extensions");
